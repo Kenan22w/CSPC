@@ -6,7 +6,7 @@ lab handout (a negative-rate test, and a test against the analytical law).
 Run with:  pytest -v
 """
 
-import numpy as np
+import numpy as np      
 import pytest
 from decay import simulate, simulate_loop
 
@@ -20,8 +20,30 @@ def test_starts_at_N0():
 #   Check that calling simulate(...) with a negative lam raises a ValueError.
 #   Which pytest tool checks that an error is raised?
 
+def test_rejects_negative_rate():
+    with pytest.raises(ValueError):
+        simulate (1000, -0.1)
+
 
 # TODO 2: test_matches_law
 #   Check that the simulation's AVERAGE over many seeds is close to the
 #   physical law  N0 * exp(-lam * t).
 #   Which pytest tool compares floating-point values with a tolerance?
+def test_matches_law():
+    N0 = 10000
+    lam = 0.4
+    dt = 0.01
+    steps = 200
+
+    results = []
+
+    for seed in range(100):
+        result = simulate(N0, lam, dt, steps, seed)
+        results.append(result[-1])
+
+    average = np.mean(results)
+
+    t = steps * dt
+    expected = N0 * np.exp(-lam * t)
+
+    assert average == pytest.approx(expected, rel=0.02)
