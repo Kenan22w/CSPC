@@ -35,3 +35,35 @@ Create the environment for a given lab:
 
 - The NumPy vectorised implementation was much faster than the pure-Python
   loop, showing the advantage of vectorisation for this type of simulation.
+
+
+
+
+
+---
+
+## PW1 - Lab B: Observed vs Analytical Decay
+
+**What I built:**
+
+- Read the observed decay data from `decay_observed.csv`.
+- Compared the observed data with the analytical decay law
+  `N(t) = N0 exp(-lambda t)` using `lambda = 0.3`.
+- Created a 1x2 figure showing the observed data and analytical curve
+  on shared axes.
+- Created a Snakemake workflow to automate generation of `figure.png`.
+
+**What the data showed:**
+
+- The observed count decreases over time and follows the general
+  exponential decay trend of the analytical model.
+- The observed data has some fluctuations around the analytical curve.
+
+**Conclusion:**
+
+- The observed data generally follows the expected analytical decay
+  behaviour, while showing fluctuations compared with the smooth
+  analytical curve.
+- Snakemake automates the workflow by checking the input and output
+  files and running `plot.py` when the output needs to be generated or
+  updated.
