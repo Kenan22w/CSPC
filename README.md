@@ -67,3 +67,23 @@ Create the environment for a given lab:
 - Snakemake automates the workflow by checking the input and output
   files and running `plot.py` when the output needs to be generated or
   updated.
+
+
+
+## PW2 — Lab A
+
+### Motion from Tracking Data
+
+The position data was differentiated twice using `numpy.gradient` to calculate velocity and acceleration.
+
+The mean acceleration was approximately **-8.58 m/s²**, reasonably close to the theoretical free-fall acceleration of **-9.81 m/s²**.
+
+The acceleration was much noisier than the position because differentiation amplifies measurement noise. Differentiating twice amplifies the noise further. The acceleration standard deviation was approximately **28.72 m/s²**.
+
+The noisy acceleration was integrated back to velocity and position using `scipy.integrate.cumulative_trapezoid`. The maximum difference between the recovered and original position was approximately **0.78 m**, within about one metre.
+
+This demonstrates that differentiation amplifies noise, while integration can suppress random noise.
+
+### Bonus — 2D Trajectory
+
+The x and y coordinates were differentiated separately to calculate the velocity components. The speed was calculated using `sqrt(vx**2 + vy**2)` and plotted against time. The 2D path was also plotted using the x and y coordinates.
