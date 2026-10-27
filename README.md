@@ -158,3 +158,90 @@ approximately **50 mL**.
 The pH curve and its slope were plotted side by side in
 `titration.png`, with a line at the equivalence point, to show
 how the equivalence point can be identified numerically.
+
+
+
+# PW3 — Data, Distributions, Testing, and Causation
+
+## 1. Heart Disease Dataset
+
+I used pandas, NumPy, Matplotlib and SciPy to analyse the Cleveland heart disease dataset. It contains 303 rows and 14 columns, with no missing values.
+
+### Distribution of the Variables
+
+I examined age, cholesterol (`chol`), resting blood pressure (`trestbps`) and maximum heart rate (`thalach`) using histograms, Q-Q plots and the Shapiro-Wilk normality test.
+
+- **Age:** The distribution is fairly balanced, with a slight left skew.
+- **Cholesterol:** The distribution is right-skewed, with some high values.
+- **Resting blood pressure:** The distribution is moderately right-skewed.
+- **Maximum heart rate:** The distribution has a slight left skew.
+
+At the 0.05 significance level, the Shapiro-Wilk tests rejected strict normality for all four variables. The graphical checks are also useful: age and maximum heart rate look more balanced than cholesterol. I therefore considered both the plots and the statistical tests when choosing methods for Session 2.
+
+## 2. Comparing Maximum Heart Rate
+
+I compared maximum heart rate between patients with heart disease (`target = 1`) and healthy patients (`target = 0`).
+
+- Disease group: mean = **139.26 bpm**
+- Healthy group: mean = **158.38 bpm**
+- Mean difference = **−19.12 bpm**
+
+I used Welch's t-test to compare the means without assuming equal group variances. The result was statistically significant (\(t=-7.858,\ p<0.001\)). I also used the Mann-Whitney U test as a non-parametric comparison; it also showed a significant difference (\(p<0.001\)).
+
+The 95% confidence intervals were approximately 135.47–143.05 bpm for the disease group and 155.42–161.34 bpm for the healthy group. The plot shows the same clear difference as the tests.
+
+**Conclusion:** In this dataset, patients with heart disease had a lower average maximum heart rate than healthy patients. This is an association in the dataset, not proof that heart disease itself causes the difference.
+
+## 3. Age and Maximum Heart Rate
+
+I used a scatter plot, Pearson's correlation and Spearman's rank correlation to examine the relationship between age and maximum heart rate.
+
+- Pearson correlation: \(r=-0.394\)
+- Spearman correlation: \(\rho=-0.392\)
+
+Both correlations were statistically significant (\(p<0.001\)) and negative.
+
+**Conclusion:** Older patients tended to have lower maximum heart rates in this dataset. The similar Pearson and Spearman results support a negative relationship.
+
+## 4. Bonus: Entropy and Gini Impurity
+
+I calculated entropy and Gini impurity for the categorical columns `target` and `sex`, using the proportions of their categories.
+
+- `target`: entropy = **0.995 bits**, Gini impurity = **0.497**
+- `sex`: entropy = **0.905 bits**, Gini impurity = **0.435**
+
+The `target` categories are more balanced than the `sex` categories in this dataset, so `target` has higher entropy and Gini impurity.
+
+## 5. Chemical Exposure and Confounding
+
+I analysed the synthetic chemical-exposure dataset to compare benzene and cadmium in relation to malignancy.
+
+### Initial analysis
+
+In the initial correlations, cadmium had a stronger positive correlation with malignancy (\(r\approx0.880\)) than benzene (\(r\approx0.385\)). Looking only at these results, cadmium would appear to be the stronger candidate.
+
+However, cadmium was also very strongly correlated with the pollution index (\(r\approx0.982\)). This suggested that pollution could be a confounding variable.
+
+### Accounting for pollution
+
+I compared observations with similar pollution levels and calculated partial correlations while accounting for the pollution index.
+
+- Benzene remained positively associated with malignancy. Its partial correlation was approximately **0.755**.
+- Cadmium's partial correlation fell to approximately **0.013**, indicating almost no remaining linear association after accounting for pollution.
+
+**Conclusion:** In this synthetic dataset, benzene is the chemical intended to drive malignancy, while cadmium appears strongly associated in the initial analysis mainly because it is related to pollution. This demonstrates why correlation alone is not enough to identify a cause. The conclusion is supported by the dataset's design and the confounding analysis; correlation analysis by itself does not prove causation in real-world data.
+
+## 6. Files and How to Run
+
+The `PW3` folder contains the Python scripts, input CSV files, plots and the normality results table.
+
+Activate the `cspc` Conda environment, then open a terminal in the `PW3` folder and run:
+
+```bash
+python session1_heart.py
+python session2_heart.py
+python chemicals.py
+```
+
+The scripts use pandas, NumPy, Matplotlib and SciPy.
+

@@ -1,0 +1,5 @@
+variable,skewness,excess_kurtosis,shapiro_W,shapiro_p
+age,-0.208,-0.5345,0.9865,0.006069
+chol,1.13,4.398,0.9473,5.912e-09
+trestbps,0.7025,0.8459,0.9665,1.802e-06
+thalach,-0.5348,-0.0724,0.9765,6.996e-05
