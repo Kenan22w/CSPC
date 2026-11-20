@@ -1,0 +1,4 @@
+model,agreement
+scaled (13 features),0.9662921348314607
+raw/unscaled (13 features),0.702247191011236
+scaled PC1+PC2 only,0.9662921348314607

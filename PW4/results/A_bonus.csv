@@ -1,0 +1,3 @@
+model,features,test_RMSE_MPa,test_R2
+log(age),8,7.651769664732512,0.8037388731645765
+log(age) + water/binder,8,7.600293078676675,0.8063706486135177

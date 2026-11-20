@@ -245,3 +245,28 @@ python chemicals.py
 
 The scripts use pandas, NumPy, Matplotlib and SciPy.
 
+
+
+
+## PW4 — Machine Learning
+
+### Session A — Supervised Learning
+
+I analysed the UCI concrete strength dataset using linear regression, polynomial regression, KNN and decision trees.
+
+After cleaning the data, I compared different models using regression and classification metrics. Polynomial regression with degree 3 gave the lowest test RMSE of about 5.95 MPa. Degree 4 performed much worse on the test set, showing overfitting.
+
+For classification, I predicted whether concrete reaches 40 MPa. The decision tree achieved about 88.1% test accuracy, compared with 83.6% for KNN.
+
+### Session B — Unsupervised Learning
+
+I used PCA and K-Means to analyse 178 wines based on their chemical measurements.
+
+Scaling was important because the features had very different numerical ranges. K-Means achieved about 96.6% agreement with the real cultivars after scaling, compared with 70.2% without scaling.
+
+### Snakemake
+
+I created a Snakemake workflow to automate the dataset download and both analysis scripts.
+
+The complete results, figures and explanations are available in [PW4](PW4/README.md).
+
