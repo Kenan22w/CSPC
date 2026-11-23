@@ -238,9 +238,9 @@ The `PW3` folder contains the Python scripts, input CSV files, plots and the nor
 Activate the `cspc` Conda environment, then open a terminal in the `PW3` folder and run:
 
 ```bash
-python session1_heart.py
-python session2_heart.py
-python chemicals.py
+python Session1.py
+python Session2.py
+python Chemicals.py
 ```
 
 The scripts use pandas, NumPy, Matplotlib and SciPy.
